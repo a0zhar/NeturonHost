@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html manifest="cache.manifest">
+
+<head>
+	<!-- WEBKIT EXPLOIT IMPLEMENTATION FILES -->
+	<script src="common/exploit.js"></script>
+	<script src="common/helpers.js"></script>
+	<script src="common/rop.js"></script>
+	<script src="common/syscalls.js"></script>
+	
+  	<title>PS4 6.72 Host v3.0 by GamerHack</title>
+  	<link rel="stylesheet" href="css/style.css">
+  	<script>
+    function DLProgress(e) {
+      Percent = (Math.round(e.loaded / e.total * 100));
+      window.msgs.innerHTML = "Installing Offline Cache: " + Percent + "%";
+    }
+
+    function DisplayCacheProgress() {
+      setTimeout(function() {
+        window.msgs.innerHTML = "Cache Installed Successfully ✔";
+      }, 1000);
+      setTimeout(function() {
+        window.msgs.innerHTML = "Now Close And Re-Open Your Browser ...";
+      }, 3000);
+    }
+    window.applicationCache.addEventListener("progress", DLProgress, false);
+    window.applicationCache.oncached = function(e) {
+      DisplayCacheProgress();
+    };
+    window.applicationCache.onupdateready = function(e) {
+      DisplayCacheProgress();
+    };
+  </script>
+  <script src="js/loader.js"></script>
+</head>
+
+<body>
+  <div id="menu">
+    <h1 id="msgs">NEUTRON HOST</h1>
+    <hr>
+    <br>
+    <h1 style="font-size: 18px;">
+      <font color="green">Pass = <span id="passCounter"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <font color="yellow">Main Payloads</span>&nbsp;&nbsp;&nbsp;&nbsp;
+          <font color="red">Fail = <span id="failCounter"></span>
+    </h1>
+    <button class="btn" onclick="load_goldhen()"> GoldHEN v2.4b18.3 </button>
+    <button class="btn" onclick="load_hen()"> HEN v2.1.3 </button>
+    <button class="btn" onclick="load_henb()"> HEN v2.1.3b </button>
+    <button class="btn" onclick="load_mira()"> Mira </button>
+    <br>
+    <h1 style="font-size: 18px;">Payloads</h1>
+    <button class="btn btn-alt" onclick="load_jb2()"> Jailbreak </button>
+    <button class="btn" onclick="load_ftp()"> FTP </button>
+    <button class="btn" onclick="load_App2usb()"> App2USB </button>
+    <button class="btn" onclick="load_binloader()"> Bin Loader </button>
+    <br>
+    <button class="btn" onclick="load_dumperG()"> Dump Game Only </button>
+    <button class="btn" onclick="load_dumperU()"> Dump Update Only </button>
+    <button class="btn" onclick="load_dumperGU()"> Dump Game + Update </button>
+    <button class="btn" onclick="load_dumperM()"> Dump G. + U. Merged </button>
+    <br>
+    <button class="btn" onclick="load_enableUpdates()"> Enable Updates </button>
+    <button class="btn" onclick="load_disableUpdates()"> Disable Updates </button>
+    <button class="btn" onclick="tools_group()"> Backup and Restore </button>
+    <button class="btn" onclick="load_historyBlocker()"> History Blocker </button>
+    <br>
+    <button class="btn" onclick="load_LinuxUSB()"> Linux USB </button>
+    <button class="btn" onclick="load_LinuxBaikal()"> Linux Baikal </button>
+    <button class="btn" onclick="load_webrte()"> WebRTE </button>
+    <a href="http://ps4trainer.com/Trainer/index.html"><button class="btn btn-onln"> PS4 Trainer Web </button></a>
+    <br>
+    <button class="btn" onclick="load_todex()" style="margin-left: 108px;"> ToDEX </button>
+    <button class="btn" onclick="load_ps4debug()"> PS4 Debug </button>
+    <button class="btn" onclick="load_KernelDumper()"> Kernel Dumper </button>
+    <button class="btn" onclick="load_fwspoof()"> Spoof Firmware </button><select id="fws1"></select><select id="fws2"></select>
+    <br>
+    <button class="btn" onclick="load_webact()" style="margin-left: 73px;"> Web-Activator </button>
+    <button class="btn" onclick="mods_group()"> Games Mods </button>
+    <button class="btn btn-toolbox" onclick="load_orbistlbox()"> Orbis-Toolbox </button>
+    <button class="btn" onclick="load_fanthreshold()"> Fan Threshold </button>
+    <font color="white"><select id="tempC"></select>&#176;C
+      <br>
+  </div>
+  <div id="tools">
+    <h1 id="msgs2">Backup and Restore </h1>
+    <hr>
+    <br>
+    <h1 style="font-size: 18px;">Payloads</h1>
+    <button class="btn" onclick="load_DBbackup()"> DB Backup </button>
+    <button class="btn" onclick="load_DBrestore()"> DB Restore </button>
+    <button class="btn" onclick="load_SDbackup()"> Save Data Backup </button>
+    <button class="btn" onclick="load_SDrestore()"> Save Data Restore </button>
+    <br>
+    <button class="btn" onclick="load_AvatarBackup()"> Avatar Backup </button>
+    <button class="btn" onclick="load_AvatarRestore()"> Avatar Restore </button>
+    <button class="btn" onclick="load_TrophyBackup()"> Trophy Backup </button>
+    <button class="btn" onclick="load_TrophyRestore()"> Trophy Restore </button>
+    <br>
+    <button class="btn" onclick="load_HDDbackup()"> HDD Upgrade Backup </button>
+    <button class="btn" onclick="load_HDDrestore()"> HDD Upgrade Restore </button>
+    <button class="btn" onclick="load_CacheBackup()"> Offline Cache Backup </button>
+    <button class="btn" onclick="load_CacheRestore()"> Offline Cache Restore </button>
+    <br>
+    <button class="btn" onclick="load_menu()" style="margin-bottom: 241px;"> Return </button>
+  </div>
+  <div id="mods">
+    <h1 id="msgs3">Games Mods </h1>
+    <hr>
+    <br>
+    <h1 style="font-size:18px;">Payloads</h1>
+    <button class="btn" onclick="load_ArabicGuy100()"> Arabic Guy 1.00 </button>
+    <button class="btn" onclick="load_ArabicGuy127()"> Arabic Guy 1.27 </button>
+    <button class="btn" onclick="load_ArabicGuy132()"> Arabic Guy 1.32 </button>
+    <button class="btn" onclick="load_Lamance()"> Lamance v0.9 - 1.38 </button>
+    <button class="btn" onclick="load_WildeModz146()"> WildeModz-1.46 </button>
+    <br>
+    <button class="btn" onclick="load_Oysters100()"> RDR2 v1.00 </button>
+    <button class="btn" onclick="load_Oysters113()"> RDR2 v1.13 </button>
+    <button class="btn" onclick="load_Oysters119()"> RDR2 v1.19 </button>
+    <button class="btn" onclick="load_Oysters124()"> RDR2 v1.24 </button>
+    <button class="btn" onclick="load_Oysters129()"> RDR2 v1.29 </button>
+    <br>
+    <button class="btn" onclick="load_menu()" style="margin-bottom: 303px;"> Return </button>
+  </div>
+  <h1 style="margin-top: 43px;">Special Thanks to:<a href="https://twitter.com/sleirsgoevy" style="color: #f31414;margin-left: 10px;margin-right: 10px;">@sleirsgoevy</a>Leeful<a href="https://twitter.com/_AlAzif" style="color: #f31414;margin-left: 10px;">@_AlAzif</a></h1>
+  <script>
+    for (var i = 40; i <= 79; i++) {
+      var select = document.getElementById("tempC");
+      var option = document.createElement("OPTION");
+      select.options.add(option);
+      option.text = i;
+      option.value = i;
+    }
+    tempC.value = 60;
+    for (var i = 1; i <= 99; i++) {
+      var select1 = document.getElementById("fws1");
+      var option1 = document.createElement("OPTION");
+      select1.options.add(option1);
+      option1.text = i;
+      option1.value = i;
+    }
+    fws1.value = 9;
+    for (var i = 0; i <= 99; i++) {
+      var select2 = document.getElementById("fws2");
+      var option2 = document.createElement("OPTION");
+      select2.options.add(option2);
+      option2.text = ("0" + i).slice(-2);
+      option2.value = i;
+    }
+    fws2.value = 0;
+  </script>
+  <script>
+    function tools_group() {
+      document.getElementById("tools").style.display = "block";
+      document.getElementById("menu").style.display = "none";
+    }
+
+    function mods_group() {
+      document.getElementById("mods").style.display = "block";
+      document.getElementById("menu").style.display = "none";
+    }
+
+    function load_menu() {
+      document.getElementById("menu").style.display = "block";
+      document.getElementById("tools").style.display = "none";
+      document.getElementById("mods").style.display = "none";
+    }
+
+    function getScript(source, callback) {
+      var gs = document.createElement('script');
+      gs.src = source;
+      gs.onload = callback;
+      gs.async = false;
+      document.body.appendChild(gs);
+    }
+
+    function loadScript2() {
+      getScript("js/pl_loader.js", function() {});
+    }
+
+    function loadScript1() {
+      getScript(PLfile, function() {
+        setTimeout(loadScript2, 500);
+      });
+    }
+    if (localStorage.passcount == null) localStorage.passcount = 0;
+    window.passCounter.innerHTML = localStorage.passcount;
+    if (localStorage.failcount == null) localStorage.failcount = 0;
+    window.failCounter.innerHTML = localStorage.failcount;
+
+    function load_jb2() {
+      msgs.innerHTML = "Loading Jailbreak, Please Wait ...";
+      LoadedMSG = "Jailbreak Completed ✔";
+
+      function loadScript() {
+        getScript("js/jb2.js", function() {
+          setTimeout(jailbreak2, 1500);
+        });
+      }
+      loadScript();
+    }
+
+    function load_goldhen() {
+      msgs.innerHTML = "Loading GoldHEN v2.4b18.3 ...";
+      LoadedMSG = "GoldHEN v2.4b18.3 Loaded ✔";
+      PLfile = "payloads/goldhen_2.4b18.3.bin";
+      setTimeout(jailbreak, 500);
+    }
+
+    function load_hen() {
+      msgs.innerHTML = "Loading HEN v2.1.3 ...";
+      LoadedMSG = "HEN v2.1.3 Loaded ✔";
+      PLfile = "payloads/pl_hen_2.1.3.bin";
+      setTimeout(jailbreak, 500);
+    }
+
+    function load_henb() {
+      msgs.innerHTML = "Loading HEN v2.1.3 ...";
+      LoadedMSG = "HEN v2.1.3b Loaded ✔";
+      PLfile = "payloads/pl_hen_2.1.3b.bin";
+      setTimeout(jailbreak, 500);
+    }
+
+    function load_mira() {
+      msgs.innerHTML = "Loading Mira ...";
+      LoadedMSG = "Mira Loaded ✔";
+      PLfile = "payloads/pl_mira.bin";
+      setTimeout(jailbreak, 500);
+    }
+
+    function load_ftp() {
+      msgs.innerHTML = "Loading FTP ...";
+      LoadedMSG = "FTP Loaded ✔";
+      PLfile = "payloads/pl_FTP.bin";
+      loadScript1();
+    }
+
+    function load_App2usb() {
+      msgs.innerHTML = "Loading App2usb ...";
+      LoadedMSG = "App2usb Loaded ✔";
+      PLfile = "payloads/pl_App2usb.bin";
+      loadScript1();
+    }
+
+    function load_binloader() {
+      msgs.innerHTML = "Loading Bin Loader ...";
+      LoadedMSG = "Send Payload To Port 9021";
+
+      function loadScript() {
+        getScript("js/pl_loaderBL.js");
+      }
+      loadScript();
+    }
+
+    function load_dumperG() {
+      msgs.innerHTML = "Loading Dumper ...";
+      LoadedMSG = "Dumper Loaded ✔";
+      PLfile = "payloads/pl_DumperG.bin";
+      loadScript1();
+    }
+
+    function load_dumperU() {
+      msgs.innerHTML = "Loading Dumper ...";
+      LoadedMSG = "Dumper Loaded ✔";
+      PLfile = "payloads/pl_DumperU.bin";
+      loadScript1();
+    }
+
+    function load_dumperGU() {
+      msgs.innerHTML = "Loading Dumper ...";
+      LoadedMSG = "Dumper Loaded ✔";
+      PLfile = "payloads/pl_DumperGU.bin";
+      loadScript1();
+    }
+
+    function load_dumperM() {
+      msgs.innerHTML = "Loading Dumper ...";
+      LoadedMSG = "Dumper Loaded ✔";
+      PLfile = "payloads/pl_DumperM.bin";
+      loadScript1();
+    }
+
+    function load_enableUpdates() {
+      msgs.innerHTML = "Enabling Updates ...";
+      LoadedMSG = "Enabled Updates ✔";
+      PLfile = "payloads/pl_UpdatesEnable.bin";
+      loadScript1();
+    }
+
+    function load_disableUpdates() {
+      msgs.innerHTML = "Disabling Updates ...";
+      LoadedMSG = "Disabled Updates ✔";
+      PLfile = "payloads/pl_UpdatesDisable.bin";
+      loadScript1();
+    }
+
+    function load_DBbackup() {
+      msgs2.innerHTML = "Loading Database Backup ...";
+      LoadedMSG = "Database Backup Loaded ✔";
+      PLfile = "payloads/pl_DBbackup.bin";
+      loadScript1();
+    }
+
+    function load_DBrestore() {
+      msgs2.innerHTML = "Loading Database Restore ...";
+      LoadedMSG = "Database Restore Loaded ✔";
+      PLfile = "payloads/pl_DBrestore.bin";
+      loadScript1();
+    }
+
+    function load_SDbackup() {
+      msgs2.innerHTML = "Loading Save Data Backup ...";
+      LoadedMSG = "Save Data Backup Loaded ✔";
+      PLfile = "payloads/pl_SaveDataBackup.bin";
+      loadScript1();
+    }
+
+    function load_SDrestore() {
+      msgs2.innerHTML = "Loading Save Data Restore ...";
+      LoadedMSG = "Save Data Restore Loaded ✔";
+      PLfile = "payloads/pl_SaveDataRestore.bin";
+      loadScript1();
+    }
+
+    function load_AvatarBackup() {
+      msgs2.innerHTML = "Loading Avatar Backup ...";
+      LoadedMSG = "Avatar Backup Loaded ✔";
+      PLfile = "payloads/pl_LinuxUSB.bin";
+      loadScript1();
+    }
+
+    function load_AvatarRestore() {
+      msgs2.innerHTML = "Loading Avatar Restore ...";
+      LoadedMSG = "Avatar Restore Loaded ✔";
+      PLfile = "payloads/pl_AvatarBackup.bin";
+      loadScript1();
+    }
+
+    function load_TrophyBackup() {
+      msgs2.innerHTML = "Loading Trophy Backup ...";
+      LoadedMSG = "Trophy Backup Loaded ✔";
+      PLfile = "payloads/pl_TrophyBackup.bin";
+      loadScript1();
+    }
+
+    function load_TrophyRestore() {
+      msgs2.innerHTML = "Loading Trophy Restore ...";
+      LoadedMSG = "Trophy Restore Loaded ✔";
+      PLfile = "payloads/pl_TrophyRestore.bin";
+      loadScript1();
+    }
+
+    function load_HDDbackup() {
+      msgs2.innerHTML = "Loading HDD Upgrade Backup ...";
+      LoadedMSG = "HDD Upgrade Backup Loaded ✔";
+      PLfile = "payloads/pl_HDD_Backup.bin";
+      loadScript1();
+    }
+
+    function load_HDDrestore() {
+      msgs2.innerHTML = "Loading HDD Upgrade Restore ...";
+      LoadedMSG = "HDD Upgrade Restore Loaded ✔";
+      PLfile = "payloads/pl_HDD_Restore.bin";
+      loadScript1();
+    }
+
+    function load_CacheBackup() {
+      msgs2.innerHTML = "Loading Offline Cache Backup ...";
+      LoadedMSG = "Offline Cache Backup Loaded ✔";
+      PLfile = "payloads/pl_OfflineCacheBackup.bin";
+      loadScript1();
+    }
+
+    function load_CacheRestore() {
+      msgs2.innerHTML = "Loading Offline Cache Restore ...";
+      LoadedMSG = "Offline Cache Restore Loaded ✔";
+      PLfile = "payloads/pl_OfflineCacheRestore.bin";
+      loadScript1();
+    }
+
+    function load_LinuxUSB() {
+      msgs.innerHTML = "Loading Linux Payload ...";
+      LoadedMSG = "Linux Payload Loaded ✔";
+      PLfile = "payloads/pl_AvatarRestore.bin";
+      loadScript1();
+    }
+
+    function load_LinuxBaikal() {
+      msgs.innerHTML = "Loading Linux Payload ...";
+      LoadedMSG = "Linux Payload Loaded ✔";
+      PLfile = "payloads/pl_LinuxBaikal.bin";
+      loadScript1();
+    }
+
+    function load_historyBlocker() {
+      msgs.innerHTML = "Loading History Blocker ...";
+      LoadedMSG = "History Blocker Loaded ✔";
+      PLfile = "payloads/pl_HistoryBlocker.bin";
+      loadScript1();
+    }
+
+    function load_webrte() {
+      msgs.innerHTML = "Loading WebRTE ...";
+      LoadedMSG = "WebRTE Loaded ✔";
+      PLfile = "payloads/pl_WebRTE.bin";
+      loadScript1();
+    }
+
+    function load_webact() {
+      msgs.innerHTML = "Loading Web-Activator ...";
+      LoadedMSG = "Web-Activator Loaded ✔";
+
+      function loadScript() {
+        getScript("js/pl_loaderWeb.js");
+      }
+      loadScript();
+
+      function loadPLScript() {
+        getScript("js/payload.js");
+      }
+      loadPLScript();
+    }
+
+    function preweb() {
+      function loadScript() {
+        getScript("js/frontend.js");
+      }
+      loadScript();
+    }
+
+    function load_ps4debug() {
+      msgs.innerHTML = "Loading PS4 Debug ...";
+      LoadedMSG = "PS4 Debug Loaded ✔";
+      PLfile = "payloads/pl_PS4Debug.bin";
+      loadScript1();
+    }
+
+    function load_KernelDumper() {
+      msgs.innerHTML = "Loading Kernel Dumper ...";
+      LoadedMSG = "Kernel Dumper Loaded ✔";
+      PLfile = "payloads/pl_KernelDumper.bin";
+      loadScript1();
+    }
+
+    function load_fwspoof() {
+      msgs.innerHTML = "Spoofing Firmware ...";
+      LoadedMSG = "Firmware Spoofed ✔";
+
+      function loadScript() {
+        getScript("js/pl_loaderFW.js");
+      }
+      loadScript();
+
+      function loadPLScript() {
+        getScript("js/pl_FWspoof.js");
+      }
+      loadPLScript();
+    }
+
+    function load_todex() {
+      msgs.innerHTML = "Loading ToDex ...";
+      LoadedMSG = "ToDex Loaded ✔";
+      PLfile = "payloads/pl_ToDex.bin";
+      loadScript1();
+    }
+
+    function load_ArabicGuy100() {
+      msgs3.innerHTML = "Loading Arabic Guy 1.00 ...";
+      LoadedMSG = "Arabic Guy 1.00 Loaded ✔";
+      PLfile = "payloads/pl_GTA_ArabicGuy100.bin";
+      loadScript1();
+    }
+
+    function load_ArabicGuy127() {
+      msgs3.innerHTML = "Loading Arabic Guy 1.27 ...";
+      LoadedMSG = "Arabic Guy 1.27 Loaded ✔";
+      PLfile = "payloads/pl_GTA_ArabicGuy127.bin";
+      loadScript1();
+    }
+
+    function load_ArabicGuy132() {
+      msgs3.innerHTML = "Loading Arabic Guy 1.32 ...";
+      LoadedMSG = "Arabic Guy 1.32 Loaded ✔";
+      PLfile = "payloads/pl_GTA_ArabicGuy132.bin";
+      loadScript1();
+    }
+
+    function load_Lamance() {
+      msgs3.innerHTML = "Loading Lamance v0.9 ...";
+      LoadedMSG = "Lamance v0.9 Loaded ✔";
+      PLfile = "payloads/pl_GTA_Lamance-v0.9-1.38.bin";
+      loadScript1();
+    }
+
+    function load_WildeModz146() {
+      msgs3.innerHTML = "Loading WildeModz-1.46 ...";
+      LoadedMSG = "WildeModz-1.46 Loaded ✔";
+      PLfile = "payloads/WildeModz-1.46.bin";
+      loadScript1();
+    }
+
+    function load_Oysters100() {
+      msgs3.innerHTML = "Loading Oysters Menu v1.00 ...";
+      LoadedMSG = "Oysters Menu 1.00 Loaded ✔";
+      PLfile = "payloads/OystersMenu-v1.3.8-v1.00.bin";
+      loadScript1();
+    }
+
+    function load_Oysters113() {
+      msgs3.innerHTML = "Loading Oysters Menu v1.13 ...";
+      LoadedMSG = "Oysters Menu 1.13 Loaded ✔";
+      PLfile = "payloads/OystersMenu-v1.3.8-v1.13.bin";
+      loadScript1();
+    }
+
+    function load_Oysters119() {
+      msgs3.innerHTML = "Loading Oysters Menu v1.19 ...";
+      LoadedMSG = "Oysters Menu 1.19 Loaded ✔";
+      PLfile = "payloads/OystersMenu-v1.3.8-v1.19.bin";
+      loadScript1();
+    }
+
+    function load_Oysters124() {
+      msgs3.innerHTML = "Loading Oysters Menu v1.24 ...";
+      LoadedMSG = "Oysters Menu 1.24 Loaded ✔";
+      PLfile = "payloads/OystersMenu-v1.3.8-v1.24.bin";
+      loadScript1();
+    }
+
+    function load_Oysters129() {
+      msgs3.innerHTML = "Loading Oysters Menu v1.29 ...";
+      LoadedMSG = "Oysters Menu 1.29 Loaded ✔";
+      PLfile = "payloads/OystersMenu-v1.3.8-v1.29.bin";
+      loadScript1();
+    }
+
+    function load_orbistlbox() {
+      msgs.innerHTML = "Loading Orbis-Toolbox ...";
+      LoadedMSG = "Orbis-Toolbox Loaded ✔";
+      PLfile = "payloads/pl_Orbis-Toolbox-672.bin";
+      loadScript1();
+    }
+
+    function load_fanthreshold() {
+      msgs.innerHTML = "Loading Fan Threshold ...";
+      LoadedMSG = "Fan Threshold Loaded ✔";
+      fanTemp = tempC.value;
+      PLfile = "payloads/pl_FanThresh.js";
+      loadScript1();
+    }
+  </script>
+</body>
+
+</html>
